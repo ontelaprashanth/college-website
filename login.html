@@ -11,7 +11,7 @@
   <div class="login-container">
     <h2>🎓 Student Login</h2>
     <form onsubmit="return validateLogin()">
-      <input type="text" id="hallticket" placeholder="Hall Ticket Number" required pattern="^\d{10}$" title="Enter 10-digit Hall Ticket No"/>
+      <input type="text" id="hallticket" placeholder="Enter Hall Ticket No" required pattern="^\d{10}$" title="Enter 10-digit numeric Hall Ticket No" inputmode="numeric" maxlength="10"/>
       <div class="password-wrapper">
         <input type="password" id="password" placeholder="Password" required />
         <span class="toggle-password" onclick="togglePassword()">👁️</span>
@@ -29,19 +29,24 @@
     }
 
     function validateLogin() {
-      const htno = document.getElementById("hallticket").value;
-      const pass = document.getElementById("password").value;
+      const htno = document.getElementById("hallticket").value.trim();
+      const pass = document.getElementById("password").value.trim();
       const msg = document.getElementById("loginMsg");
 
-      // Sample student credentials (hardcoded demo)
-      if (htno === "21051A0555" && pass === "vaageswari123") {
-        window.location.href = "student_dashboard.html";
-        return false;
+      // Sample: Accept only numeric hall ticket number (e.g., 2105101555)
+      if (/^\d{10}$/.test(htno)) {
+        if (htno === "2105101555" && pass === "vaageswari123") {
+          window.location.href = "student_dashboard.html";
+        } else {
+          msg.textContent = "❌ Invalid Hall Ticket Number or Password!";
+        }
       } else {
-        msg.textContent = "❌ Invalid Hall Ticket Number or Password!";
-        return false;
+        msg.textContent = "❌ Hall Ticket must be 10 digits only!";
       }
+
+      return false;
     }
   </script>
 </body>
 </html>
+
