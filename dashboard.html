@@ -1,20 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Student Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard - Vaageswari</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 </head>
 <body>
-  <div class="dashboard">
-    <h2>Welcome to Student Dashboard</h2>
-    <ul>
-      <li>📊 View Attendance</li>
-      <li>📄 Download Marks Memos</li>
-      <li>📅 Exam Schedule</li>
-      <li>📨 Notifications</li>
-    </ul>
-    <a href="index.html" class="btn">Back to Home</a>
-  </div>
+  <header class="top-bar">
+    <a href="index.html" class="home-btn">🏠 Home</a>
+    <a href="login.html" class="logout-btn">🚪 Logout</a>
+    <h1>Student Dashboard</h1>
+  </header>
+
+  <section class="dashboard" data-aos="fade-up">
+    <div class="card welcome">
+      <h2>Welcome, Prashanth Ontela</h2>
+      <p>Hall Ticket No: 21X91A05B0</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <h3>📚 Course</h3>
+        <p>B.Tech - CSE</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <h3>📆 Semester</h3>
+        <p>IV - 2</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="300">
+        <h3>📈 Attendance</h3>
+        <p>89%</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="400">
+        <h3>📝 Internal Marks</h3>
+        <p>26/30</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="500">
+        <h3>🎓 CGPA</h3>
+        <p>8.4</p>
+      </div>
+    </div>
+
+    <div class="card announcements" data-aos="fade-up" data-aos-delay="600">
+      <h3>📢 Notices</h3>
+      <ul>
+        <li>Mid Exams start on Aug 1</li>
+        <li>Project reviews on July 27</li>
+        <li>Infosys Campus Drive: Sept 10</li>
+      </ul>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800 });
+  </script>
 </body>
 </html>
