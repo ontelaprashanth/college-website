@@ -11,7 +11,7 @@
   <div class="login-container">
     <h2>🎓 Student Login</h2>
     <form onsubmit="return validateLogin()">
-      <input type="text" id="username" placeholder="Username" required />
+      <input type="text" id="hallticket" placeholder="Hall Ticket Number" required pattern="^\d{10}$" title="Enter 10-digit Hall Ticket No"/>
       <div class="password-wrapper">
         <input type="password" id="password" placeholder="Password" required />
         <span class="toggle-password" onclick="togglePassword()">👁️</span>
@@ -29,15 +29,16 @@
     }
 
     function validateLogin() {
-      const user = document.getElementById("username").value;
+      const htno = document.getElementById("hallticket").value;
       const pass = document.getElementById("password").value;
       const msg = document.getElementById("loginMsg");
 
-      if (user === "student001" && pass === "vaageswari") {
+      // Sample student credentials (hardcoded demo)
+      if (htno === "21051A0555" && pass === "vaageswari123") {
         window.location.href = "student_dashboard.html";
         return false;
       } else {
-        msg.textContent = "❌ Invalid username or password!";
+        msg.textContent = "❌ Invalid Hall Ticket Number or Password!";
         return false;
       }
     }
