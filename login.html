@@ -3,29 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student Login - Vaageswari College</title>
-  <link rel="stylesheet" href="login.css"/>
-</head>
-<body class="login-body">
+  <title>Student Login | Vaageswari College</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to right, #ff6a00, #ff8800);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: fadeIn 1s ease-in;
+    }
 
-  <div class="login-container">
-    <h2>🎓 Student Login</h2>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-box {
+      background: #fff;
+      color: #333;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 136, 0, 0.4);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #ff6a00;
+    }
+
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 2px solid #ff6a00;
+      border-radius: 6px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff6a00;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-box button:hover {
+      background-color: #e65c00;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 40px;
+      top: 174px;
+      cursor: pointer;
+      font-size: 18px;
+      color: #ff6a00;
+    }
+
+    #loginMsg {
+      margin-top: 10px;
+      color: red;
+      font-weight: 500;
+    }
+
+    .home-btn {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: #ff6a00;
+      cursor: pointer;
+    }
+
+    .home-btn:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 500px) {
+      .toggle-password {
+        top: 160px;
+        right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <button class="home-btn" onclick="window.location.href='index.html'">🏠 Home</button>
+    <h2>Student Login</h2>
     <form onsubmit="return validateLogin()">
-      <input type="text" id="hallticket" placeholder="Enter Hall Ticket No" required pattern="^\d{10}$" title="Enter 10-digit numeric Hall Ticket No" inputmode="numeric" maxlength="10"/>
-      <div class="password-wrapper">
+      <input type="text" id="hallticket" placeholder="Hall Ticket No (10 digits)" required />
+      <div style="position: relative;">
         <input type="password" id="password" placeholder="Password" required />
         <span class="toggle-password" onclick="togglePassword()">👁️</span>
       </div>
       <button type="submit">Login</button>
-      <a href="index.html" class="home-btn">🏠 Home</a>
+      <div id="loginMsg"></div>
     </form>
-    <p class="login-msg" id="loginMsg"></p>
   </div>
 
   <script>
+    const students = [
+      { htno: "2105101555", password: "vaageswari123" },
+      { htno: "2105101666", password: "student2025" },
+      { htno: "2105101444", password: "vce12345" },
+    ];
+
     function togglePassword() {
-      const passwordInput = document.getElementById("password");
-      passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+      const passField = document.getElementById("password");
+      passField.type = passField.type === "password" ? "text" : "password";
     }
 
     function validateLogin() {
@@ -33,15 +136,18 @@
       const pass = document.getElementById("password").value.trim();
       const msg = document.getElementById("loginMsg");
 
-      // Sample: Accept only numeric hall ticket number (e.g., 2105101555)
-      if (/^\d{10}$/.test(htno)) {
-        if (htno === "2105101555" && pass === "vaageswari123") {
-          window.location.href = "dashboard.html";
-        } else {
-          msg.textContent = "❌ Invalid Hall Ticket Number or Password!";
-        }
-      } else {
+      if (!/^\d{10}$/.test(htno)) {
         msg.textContent = "❌ Hall Ticket must be 10 digits only!";
+        return false;
+      }
+
+      const match = students.find((s) => s.htno === htno && s.password === pass);
+
+      if (match) {
+        localStorage.setItem("studentHTNO", htno);
+        window.location.href = "dashboard.html";
+      } else {
+        msg.textContent = "❌ Invalid Hall Ticket Number or Password!";
       }
 
       return false;
@@ -49,4 +155,5 @@
   </script>
 </body>
 </html>
+
 
