@@ -3,42 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student Login - Vaageswari</title>
-  <link rel="stylesheet" href="login.css" />
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <title>Student Login - Vaageswari College</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
-  <header class="top-bar">
-    <a href="index.html" class="home-btn">🏠 Home</a>
-    <h1>Vaageswari College of Engineering</h1>
-  </header>
+<body class="login-body">
 
-  <div class="login-container" data-aos="zoom-in">
-    <div class="login-card">
-      <img src="logo.png" alt="Logo" class="logo" />
-      <h2>Student Login</h2>
-      <form action="dashboard.html" method="POST">
-        <input type="text" name="htno" placeholder="Hall Ticket Number" required />
-        <input type="password" name="password" placeholder="Password" required />
-        <button type="submit" class="login-btn">Login</button>
-        <p class="note">🔒 Secure Login | Need help? Contact admin</p>
-      </form>
-
-      <div class="random-info">
-        <h3>📢 Announcements</h3>
-        <ul>
-          <li>Internal Marks will be released by July 25</li>
-          <li>Mid Exam starts from Aug 1</li>
-          <li>Campus Drive: Infosys - Sept 10</li>
-        </ul>
+  <div class="login-container">
+    <h2>🎓 Student Login</h2>
+    <form onsubmit="return validateLogin()">
+      <input type="text" id="username" placeholder="Username" required />
+      <div class="password-wrapper">
+        <input type="password" id="password" placeholder="Password" required />
+        <span class="toggle-password" onclick="togglePassword()">👁️</span>
       </div>
-    </div>
+      <button type="submit">Login</button>
+      <a href="index.html" class="home-btn">🏠 Home</a>
+    </form>
+    <p class="login-msg" id="loginMsg"></p>
   </div>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 800 });
+    function togglePassword() {
+      const passwordInput = document.getElementById("password");
+      passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+    }
+
+    function validateLogin() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      const msg = document.getElementById("loginMsg");
+
+      if (user === "student001" && pass === "vaageswari") {
+        window.location.href = "student_dashboard.html";
+        return false;
+      } else {
+        msg.textContent = "❌ Invalid username or password!";
+        return false;
+      }
+    }
   </script>
 </body>
 </html>
-
